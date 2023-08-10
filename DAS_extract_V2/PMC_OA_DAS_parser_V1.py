@@ -84,7 +84,7 @@ def parse_xml_directory(directory):
 
 
 
-xml_directory = '/Results'
+xml_directory = '/Users/muthuku/Desktop/final_xmls'
 df1 = parse_xml_directory(xml_directory)
 
 print(df1)

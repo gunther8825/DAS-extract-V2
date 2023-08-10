@@ -139,8 +139,8 @@ outputs a filtered csv of database containing only our articles of interest'''
 
 #STEP 3 - grab the full text XML from each PMC folder and create a folder with all articles
 
-source_folder = '/example_files'
-target_folder = '/Results'
+source_folder = '/Users/muthuku/Desktop/PMC_folder_LARGE_DB2'
+target_folder = '/Users/muthuku/Desktop/final'
 file_extension = '.nxml'
 
 get_nxml(source_folder,target_folder,file_extension)

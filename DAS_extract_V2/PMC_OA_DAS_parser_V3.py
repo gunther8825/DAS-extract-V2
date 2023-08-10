@@ -201,7 +201,7 @@ def parse_xml_directory(directory):
 	df = pd.DataFrame(data)
 	return df
 #this should be the path to the folder containing all xml files of full text articles 
-xml_directory = '/Results/final_xml_07_22'
+xml_directory = '/Users/muthuku/Desktop/final_xml_07_22'
 #use the function to parse through each file in directory and extract key info +DAS
 df1 = parse_xml_directory(xml_directory)
 #df1.to_csv("new_code_check.csv", encoding = "utf-8")
