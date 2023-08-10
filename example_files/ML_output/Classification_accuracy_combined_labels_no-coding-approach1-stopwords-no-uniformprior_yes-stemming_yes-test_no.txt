@@ -1,0 +1,36 @@
+Accuracy of third classifier:0.6857142857142857
+Accuracy of third classifier on top-frequency DAS:0.6857142857142857
+Weighted accuracy of third classifier:0.6857142857142857
+With cross validation:0
+With Grid Search:0.7039682539682539, best parameters: {'clf-svm__alpha': 0.01, 'tfidf__use_idf': True, 'vect__ngram_range': (1, 1)}
+Precision of third classifier:[1.         1.         0.83333333 0.6875     0.33333333 0.5       ]
+Precision (micro) of third classifier:0.6857142857142857
+Precision (macro) of third classifier:0.7256944444444445
+Precision (weighted) of third classifier:0.6702380952380953
+Recall of third classifier:[0.75       1.         1.         0.78571429 0.2        0.5       ]
+Recall (micro) of third classifier:0.6857142857142857
+Recall (macro) of third classifier:0.705952380952381
+Recall (weighted) of third classifier:0.6857142857142857
+Classification report of third classifier:              precision    recall  f1-score   support
+
+           0       1.00      0.75      0.86         4
+           1       1.00      1.00      1.00         1
+           2       0.83      1.00      0.91         5
+           3       0.69      0.79      0.73        14
+           4       0.33      0.20      0.25         5
+           5       0.50      0.50      0.50         6
+
+    accuracy                           0.69        35
+   macro avg       0.73      0.71      0.71        35
+weighted avg       0.67      0.69      0.67        35
+
+Confusion matrix report of third classifier:[[ 3  0  0  1  0  0]
+ [ 0  1  0  0  0  0]
+ [ 0  0  5  0  0  0]
+ [ 0  0  0 11  2  1]
+ [ 0  0  1  1  1  2]
+ [ 0  0  0  3  0  3]]
+f1 of third classifier:[0.85714286 1.         0.90909091 0.73333333 0.25       0.5       ]
+f1_macro of third classifier:0.7082611832611834
+f1_micro of third classifier:0.6857142857142857
+f1_weighted of third classifier:0.6711626468769326

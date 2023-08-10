@@ -124,43 +124,30 @@ def parse_xml_directory(directory):
 	df = pd.DataFrame(data)
 	return df
 #this should be the path to the folder containing all xml files of full text articles 
-xml_directory = '/Users/muthuku/Desktop/final_xml_07_22'
+#xml_directory = '/Users/muthuku/Desktop/final_xml_07_22'
 #use the function to parse through each file in directory and extract key info +DAS
-df1 = parse_xml_directory(xml_directory)
+#df1 = parse_xml_directory(xml_directory)
 
 #DATAFRAME CLEAN UP STEPS
 
 # create a combined DAS column to include results from 3 methods of DAS collection 
-df1['combined_DAS'] = df1['Data Availability 1'] + df1['Data Availability 2'] + df1['Data Availability 3']
+# df1['combined_DAS'] = df1['Data Availability 1'] + df1['Data Availability 2'] + df1['Data Availability 3']
 
-count = 0
-for n in df1['combined_DAS']:
-	count += 1
-	if n == []:
-		n.append("Not applicable " + str(count))
+# count = 0
+# for n in df1['combined_DAS']:
+# 	count += 1
+# 	if n == []:
+# 		n.append("Not applicable " + str(count))
 
 
 #combine URLs as well 
-df1['all_urls'] = df1['URL1'] +df1['URL2'] + df1['URL3']
+# df1['all_urls'] = df1['URL1'] +df1['URL2'] + df1['URL3']
 #drop individual columns 
-column_list = ['Data Availability 1','Data Availability 2','Data Availability 3','URL1', 'URL2','URL3']
-df2= df1.drop(columns = column_list)
-df2.to_csv("findall3.csv")
+# column_list = ['Data Availability 1','Data Availability 2','Data Availability 3','URL1', 'URL2','URL3']
+# df2= df1.drop(columns = column_list)
+# df2.to_csv("findall3.csv")
 
 #convert the list of seperate strings into a single string
-df2['combined_string_DAS'] = df2['combined_DAS'].apply(lambda x: ' '.join(x))
-df2['combined_string_DAS'] = df2['combined_string_DAS'].str.replace(',', '')
-# Split data availability statements into separate rows
-df_expanded = pd.DataFrame(df2['combined_DAS'].explode())
-# Merge the expanded DataFrame with the original DataFrame
-df_merged = df_expanded.merge(df2, left_index=True, right_index=True)
-#drop the original list of DAS's
-df_result = df_merged.reset_index(drop=True).drop(['combined_DAS_y'], axis=1)
-df_result['combined_DAS_x'] = df_result['combined_DAS_x'].str.replace(',', '')
-df_result.drop(['combined_string_DAS'], axis=1)
-
-df_result.to_csv("FullDF_statementsV2.csv", encoding = "utf-8")
-
-df3 = pd.DataFrame(df_result['combined_DAS_x'].values, columns=[None])
-df3['Freq'] = 1
-#df3.to_csv("df3_statements_test.csv", encoding = "utf-8", header = False, index = False)
+# df2['combined_string_DAS'] = df2['combined_DAS'].apply(lambda x: ' '.join(x))
+# df2['combined_string_DAS'] = df2['combined_string_DAS'].str.replace(',', '')
+#df2.to_csv("cleaned_DAS.csv", encoding = "utf-8", header = False, index = False)

@@ -31,12 +31,12 @@ def tokenize_text(text):
 		# with open(output_path, 'w', encoding='utf-8') as output_file:
 		# 	output_file.write(' '.join(tokenized_text))
 
-pdf_path = '/Users/muthuku/Downloads/pdfs/1936-Young-SQB.pdf'  # Replace with the actual path to your PDF file
+#pdf_path = '/Users/muthuku/Downloads/pdfs/1936-Young-SQB.pdf'  # Replace with the actual path to your PDF file
 #Extract all text from PDF
-pdf_text = extract_text_from_pdf(pdf_path)
+#pdf_text = extract_text_from_pdf(pdf_path)
 #tokenize
-tokenized_text = tokenize_text(pdf_text)
+#tokenized_text = tokenize_text(pdf_text)
 #clean up this text as tokenized text may have entries such as '.' which may not be important to us
 #cleaned_tokens = [token for token in tokenized_text if token not in ['.', ',']]
 #print(cleaned_tokens)
-print(tokenized_text)
+#print(tokenized_text)

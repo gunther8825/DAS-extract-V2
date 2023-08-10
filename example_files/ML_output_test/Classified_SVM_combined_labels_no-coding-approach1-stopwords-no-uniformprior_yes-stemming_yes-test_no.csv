@@ -1,0 +1,48 @@
+The following additional data are available with the online version of this article. Additional data file 1 provides a comparison between the program based on two binary classifiers and that based on one binary classifier and a comparison between the program using 0.35 as threshold to define CpG-related or non-CpG-related promoters and that using 0.3 as threshold. We assign promoter sequences as non-CpG related if the normalized CpG content of the 3 kb centered at the TSS is less than 0.3 and as CpG related otherwise. (Normalized CpG content was computed as in [13]: fCG/eCG where fCG is observed CG frequency eCG is the expected frequency calculated as [(fC + fG)/2]2 and fC and fG are the frequencies of C and G respectively.) This working definition is based on the observation that the CpG content follows a bimodal distribution which naturally separates the promoters into two classes [1113]. Saxonov and coworkers [13] used 0.35 as a threshold to define CpG-related or non-CpG-related promoters. Better classification results are produced when we are more strict in defining non-CpG-related promoters. (Additional data file 1 gives detailed comparisons between the program using 0.35 as the threshold and the program using 0.3 as the threshold.)To build any promoter model one needs a collection of promoter sequences with high-quality annotation. We used the annotations from the EPD (version 79) [33] and the DBTSS (version 3.0) [2]. (EPD is based on experimentally determined TSSs and DBTSS on full-length oligo-capped cDNA sequences.) EPD generally has better quality annotation than DBTSS but because there are only 299 non-CpG-related promoters from EPD we also included 1271 DBTSS-annotated promoters for training. After removing redundancy we had 1445 CpG-related promoters from EPD and 1570 non-CpG-related promoters combining both EPD and DBTSS promoters. The promoter sequences 250 bp upstream and 50 bp downstream of the TSS were extracted as the positive training set. The four (two upstream and two downstream) nonoverlapping consecutive segments immediately upstream and downstream of the positive set were used as our negative training set.In the fivefold cross-validation study for non-CpG-related promoters the set of 299 non-CpG-related promoters from EPD and four-fifths of 1271 promoters from DBTSS was used to train a model and the remaining set of one-fifth of the sequences of 2.4 kb each centered at the DBTSS-annotated TSS was used as test data.For comparison we also applied different programs to the sequences extracted from the genome-wide mapping data of promoters obtained from the ChIP-chip technology [4]. Testing the trained model on a separate dataset is important to achieve an unbiased evaluation. Therefore we kept those sequences 2.4 kb centered at the probes where there was only one DBTSS annotation and no more than one probe in the same sequence. This left us with 85 non-CpG-related and 1765 CpG-related test sequences of 2.4 kb each.From CSHL Mammalian Promoter Database (CSHLmpd) [34] we defined the tissue-specific activity of each human promoter based on the tissue information of mRNAs and expressed sequence tags overlapping promoters at the 5' end. We found most housekeeping gene promoters to be CpG related as expected whereas promoters active in only a few tissues are more likely to be non-CpG related consistent with previous reports [2635]. Among 636 so-called tissue-specific non-CpG-related promoters 84 are muscle specific. We applied leave-one-out cross-validation to this set of 84 promoters.,5
+Not applicable 42,0
+Not applicable 4,0
+Not applicable 21,0
+Not applicable 39,0
+Not applicable 16,0
+Not applicable 47,0
+The UniProt (http://www.pir.uniprot.org) accession number for SMN is Q16637‚Äì1. The Entrez Gene (http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=gene) GeneID numbers for the genes discussed in the paper are SMN1 (6606) and SMN2 (6607).,3
+Not applicable 8,0
+The Gene Expression Omnibus (GEO) (http://www.ncbi.nlm.nih.gov/geo) accession number discussed in this paper is GSE7580.The Arabidopsis Information Resource (TAIR) (http://www.arabidopsis.org) accession number for Col and Ler expression profiles is 1008803961.,3
+Not applicable 17,0
+Not applicable 9,0
+Not applicable 14,0
+Accession numbers for the ArrayExpress (http://www.ebi.ac.uk/arrayexpress) data discussed in this paper are A-MEXP-602 array design and E-MEXP-951 experimental data.The European Molecular Biology Laboratory database (EMBL) (http://www.ebi.ac.uk/embl) accession number for the FT promoter sequence in Ler is AM492685.A browser-based interface to the data is available at the following website: http://dynagen.ijm.jussieu.fr/research/tools/repet/gbrowse/arabidopsis.,3
+"lwgv is distributed under the GPL license.Project name: lwgvProject homepage: Operating systems: linux and mac os xProgramming languages: COther requirements: apache cgic gd graphics library lex (flex) yacc (bison)Any restrictions to use by non-academics: nonelwgv is distributed as a source code tarball and installs with the standard unix ""./configure"" and ""make"" commands. Details about installing lwgv writing tracks and customizing the output can be found in the manual and README files distributed with the software.",3
+Not applicable 44,0
+Not applicable 19,0
+Not applicable 43,0
+Not applicable 11,0
+Not applicable 46,0
+Not applicable 20,0
+The National Center for Biotechnology Information (http://www.ncbi.nlm.nih.gov) accession numbers for proteins discussed in this paper and the supporting information are cPRP4 (NP_492363) hPRP4 (AAC51925) LIS (AAW80862) LIS homologous sequence (AAD25639) and yPRP4 (P20053).,3
+Not applicable 45,0
+Not applicable 18,0
+Not applicable 32,0
+Not applicable 27,0
+The Gene Expession Omnibus (GEO) database (http://www.ncbi.nlm.nih.gov/geo) accession numbers for the genes discussed in this paper are ns GSE7248; knotted1 AY260164; and Zmhp1 DN233962.,3
+Not applicable 7,0
+Not applicable 28,0
+Not applicable 6,0
+The following additional data are available with the online version of this paper. Additional data file 1 tabulates the results of matching 68 randomly chosen metabolic reactions manually curated in human to the corresponding S. cerevisiae reactions inferred using the OrthoMCL-based procedure and corresponding manually curated entries in SGD YBP.,2
+Not applicable 26,0
+"Bio::NEXUS requires Perl 5.x available for free download from CPAN [20]. The current release of Bio::NEXUS is available as an installable package from CPAN [20]; the current development version of the source code is available from SourceForge [21]. The CPAN package includes Perl code test files documentation some useful scripts (e.g. nextool.pl) and examples. On UNIX-like systems (Mac OS X Linux UNIX or Cygwin running within Windows) Bio::NEXUS can be installed using ""perl -MCPAN -e 'install Bio::NEXUS""'; or on Windows systems using ppm (Perl Package Manager). The test suite (implemented with Perl's ""Test"" module) comprises over 30 test scripts implementing over 460 subtests. The documentation written in POD (Plain Old Documentation) format includes a user manual and a tutorial (see below for examples). The code files also are annotated with POD hence references for Bio::NEXUS modules and their methods can be generated on the fly using the standard perldoc command.",3
+Not applicable 48,0
+﻿Project name: STORMProject home page: Operating system(s): Linux/UnixProgramming language: C++Other requirements: The STORM and MODSTORM programs are available as part of the Comprehensive Regulatory Element Analysis and Discovery (CREAD) package see  for more information.License: GNU GPLAny restrictions to use by non-academics: None,3
+Not applicable 33,0
+Not applicable 40,0
+Not applicable 23,0
+Not applicable 35,0
+Not applicable 15,0
+Not applicable 36,0
+Not applicable 22,0
+The GenBank (http://www.ncbi.nlm.nih.gov/Genbank) accession numbers for the genes and gene products discussed in this paper are FoxP1 (AY549152) FoxP2 isoform I (AY549148) FoxP2 isoform IV (AY549151) Hmbs (NM_013551) and Pfkp (NM_019703).The Online Mendelian Inheritance in Man (OMIM; http://www.ncbi.nlm.nih.gov/sites/entrez?db=OMIM) accession number for FOXP2 is 605317.,3
+Not applicable 41,0
+Not applicable 25,0
+Not applicable 24,0
+Project name: MUMmerGPUProject home page: Operating system(s): Linux UNIXProgramming language: C C++ CUDAOther requirements: nVidia G80 GPU CUDA 1.0License: Artistic LicenseRestrictions to use by non-academics: none.,3
+The website () offers the following services: easy access to TRED entries through text-based query interface; search for the target genes of a given TF; retrieval of the promoter sequences and the TF-binding motifs; further analysis of the retrieved sequences of promoters and motifs. TRED homepage also provides the access to the GRNs of the TF families in human mouse and rat which were constructed from its collection of the interaction data between the TFs and their target genes.,3

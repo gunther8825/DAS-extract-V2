@@ -25,9 +25,9 @@ def grab_PMIDs_from_csv(source_file, target_file):
 	extracted_PMID.replace('', np.nan, inplace=True)
 	extracted_PMID.dropna(inplace=True)
 	filtered_PMIDs = [pmid for pmid in extracted_PMID if pmid.isdigit()]
-	filtered_df = pd.DataFrame(filtered_PMIDs)
+	filtered_df = pd.DataFrame(filtered_PMIDs, columns=["PMIDs"])
 	# Save the extracted URLs to the target file
-	filtered_df.to_csv(target_file, header=None, index=None)
+	filtered_df.to_csv(target_file, header=True, index=None)
 
 def isolate_rows_by_PMID(source_file, database, output_file):
 	'''
@@ -87,8 +87,8 @@ def extract_files(folder_path):
 		#check if file ends with tar.gz and extract file contents 
 		if file_name.endswith('.tar.gz'):
 			with tarfile.open(file_path, 'r') as tar_ref:
-				tar_ref.extractall(folder_path)
-			os.remove(file_name)
+				tar_ref.extractall(file_path)
+			os.remove(file_path)
 
 
 def get_nxml(source_folder, target_folder, file_extension):
@@ -139,8 +139,8 @@ outputs a filtered csv of database containing only our articles of interest'''
 
 #STEP 3 - grab the full text XML from each PMC folder and create a folder with all articles
 
-source_folder = '/Users/muthuku/Desktop/PMC_folder_LARGE_DB2'
-target_folder = '/Users/muthuku/Desktop/final'
-file_extension = '.nxml'
+# source_folder = '/Users/muthuku/Desktop/PMC_folder_LARGE_DB2'
+# target_folder = '/Users/muthuku/Desktop/final'
+# file_extension = '.nxml'
 
-get_nxml(source_folder,target_folder,file_extension)
+# get_nxml(source_folder,target_folder,file_extension)

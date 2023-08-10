@@ -84,9 +84,9 @@ def parse_xml_directory(directory):
 
 
 
-xml_directory = '/Users/muthuku/Desktop/final_xmls'
-df1 = parse_xml_directory(xml_directory)
+# xml_directory = '/Users/muthuku/Desktop/final_xmls'
+# df1 = parse_xml_directory(xml_directory)
 
-print(df1)
-df1['combined'] = df1['Data Availability 1'] + df1['Data Availability 2'] + df1['Data Availability 3']
-df1.to_csv("string_test.csv")
+# print(df1)
+# df1['combined'] = df1['Data Availability 1'] + df1['Data Availability 2'] + df1['Data Availability 3']
+# df1.to_csv("string_test.csv")

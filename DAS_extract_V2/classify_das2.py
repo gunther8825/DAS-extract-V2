@@ -24,6 +24,7 @@ import gensim
 import csv
 import os
 import time
+import argparse
 
 # Default parameters:
 #istest_default = "yes"
@@ -65,83 +66,114 @@ skip_model5_default = "yes"
 number_test = 10
 encoding="utf-8"
 
-# User parameters:
+# # User parameters:
+parser = argparse.ArgumentParser(description="classify_das2")
 
-istest = input('Is this a test? Please reply yes or not. Leave empty for default (' + str(istest_default) + ").")
-user_input = input("Do you want to select the parameters manually or do you want to loop over all options? Select yes "
-                   "for the former. Leave empty for default (" + str(user_input_default) + ").")
+parser.add_argument("--istest", type=str, choices=["yes", "no"], default=istest_default, help="Is this a test?")
+parser.add_argument("--user_input", type=str, choices=["yes", "no"], default=user_input_default, help="User input choice")
+parser.add_argument("--combine_labels", type=str, choices=["yes", "no"], nargs="*", default=[combine_labels_default], help="Combine category labels")
+parser.add_argument("--coding", type=int, choices=[1, 2], nargs="*", default=[coding_default], help="Coding approach")
+parser.add_argument("--stopwords", type=str, choices=["yes", "no"], nargs="*", default=[stopwords_default], help="Exclude stop words")
+parser.add_argument("--uniform_prior", type=str, choices=["yes", "no"], nargs="*", default=[uniform_prior_default], help="Use uniform prior")
+parser.add_argument("--stemming", type=str, choices=["yes", "no"], nargs="*", default=[stemming_default], help="Stem words")
+parser.add_argument("--skip_model1", type=str, choices=["yes", "no"], default=skip_model1_default, help="Skip first model")
+parser.add_argument("--skip_model2", type=str, choices=["yes", "no"], default=skip_model2_default, help="Skip second model")
+parser.add_argument("--skip_model3", type=str, choices=["yes", "no"], default=skip_model3_default, help="Skip third model")
+parser.add_argument("--skip_model4", type=str, choices=["yes", "no"], default=skip_model4_default, help="Skip fourth model")
+parser.add_argument("--skip_model5", type=str, choices=["yes", "no"], default=skip_model5_default, help="Skip fifth model")
 
-if user_input == "":
-    user_input = user_input_default
-if user_input == "yes":
-    combine_labels_values = [input(
-    'Do you want to combine the category labels (1 with 2, 4 with 5)? Please leave empty for default (' + str(
-        combine_labels_default) + ").")]
-    coding_values = [input('Which coding approach will you use? Please leave empty for default (' + str(coding_default) + ").")]
-    stopwords_values = [input('Do you want to exclude stop words? Please leave empty for default (' + str(stopwords_default) + ").")]
-    uniform_prior_values = [input(
-        'Do you want to use a uniform prior for Multinomial Naive Bayes? Please leave empty for default '
-        '(' + str(uniform_prior_default) + ").")]
-    stemming_values = [input('Do you want to stem the words? Please leave empty for default '
-                            '(' + str(stemming_default) + ").")]
-else:
-    combine_labels_values = ["yes", "no"]
-    coding_values = [1] # [1,2]
-    stopwords_values = ["yes", "no"]
-    uniform_prior_values = ["yes", "no"]
-    stemming_values = ["yes", "no"]
+args = parser.parse_args()
+istest = args.istest
 
-skip_model1 = input(
-    'Do you want to skip the first model? Please leave empty for default (' + str(skip_model1_default) + ").")
-skip_model2 = input(
-    'Do you want to skip the second model? Please leave empty for default (' + str(skip_model2_default) + ").")
-skip_model3 = input(
-    'Do you want to skip the third model? Please leave empty for default (' + str(skip_model3_default) + ").")
-skip_model4 = input(
-    'Do you want to skip the fourth model? Please leave empty for default (' + str(skip_model4_default) + ").")
-skip_model5 = input(
-    'Do you want to skip the fifth model? Please leave empty for default (' + str(skip_model5_default) + ").")
+user_input = args.user_input
 
-# Set parameters:
+combine_labels_values = args.combine_labels
+coding_values = args.coding
+stopwords_values = args.stopwords
+uniform_prior_values = args.uniform_prior
+stemming_values = args.stemming
 
-if istest == "":
-    istest = istest_default
+skip_model1 = args.skip_model1
+skip_model2 = args.skip_model2
+skip_model3 = args.skip_model3
+skip_model4 = args.skip_model4
+skip_model5 = args.skip_model5
 
-if combine_labels_values == [""]:
-    combine_labels_values = [combine_labels_default]
+# istest = input('Is this a test? Please reply yes or not. Leave empty for default (' + str(istest_default) + ").")
+# user_input = input("Do you want to select the parameters manually or do you want to loop over all options? Select yes "
+#                    "for the former. Leave empty for default (" + str(user_input_default) + ").")
 
-if coding_values == [""]:
-    coding_values = [coding_default]
+# if user_input == "":
+#     user_input = user_input_default
+# if user_input == "yes":
+#     combine_labels_values = [input(
+#     'Do you want to combine the category labels (1 with 2, 4 with 5)? Please leave empty for default (' + str(
+#         combine_labels_default) + ").")]
+#     coding_values = [input('Which coding approach will you use? Please leave empty for default (' + str(coding_default) + ").")]
+#     stopwords_values = [input('Do you want to exclude stop words? Please leave empty for default (' + str(stopwords_default) + ").")]
+#     uniform_prior_values = [input(
+#         'Do you want to use a uniform prior for Multinomial Naive Bayes? Please leave empty for default '
+#         '(' + str(uniform_prior_default) + ").")]
+#     stemming_values = [input('Do you want to stem the words? Please leave empty for default '
+#                             '(' + str(stemming_default) + ").")]
+# else:
+#     combine_labels_values = ["yes", "no"]
+#     coding_values = [1] # [1,2]
+#     stopwords_values = ["yes", "no"]
+#     uniform_prior_values = ["yes", "no"]
+#     stemming_values = ["yes", "no"]
 
-if stopwords_values == [""]:
-    stopwords_values = [stopwords_default]
+# skip_model1 = input(
+#     'Do you want to skip the first model? Please leave empty for default (' + str(skip_model1_default) + ").")
+# skip_model2 = input(
+#     'Do you want to skip the second model? Please leave empty for default (' + str(skip_model2_default) + ").")
+# skip_model3 = input(
+#     'Do you want to skip the third model? Please leave empty for default (' + str(skip_model3_default) + ").")
+# skip_model4 = input(
+#     'Do you want to skip the fourth model? Please leave empty for default (' + str(skip_model4_default) + ").")
+# skip_model5 = input(
+#     'Do you want to skip the fifth model? Please leave empty for default (' + str(skip_model5_default) + ").")
 
-if stemming_values == [""]:
-    stemming_values = [stemming_default]
+# # Set parameters:
 
-if uniform_prior_values == [""]:
-    uniform_prior_values = [uniform_prior_default]
+# if istest == "":
+#     istest = istest_default
 
-if not skip_model1:
-    skip_model1 = skip_model1_default
+# if combine_labels_values == [""]:
+#     combine_labels_values = [combine_labels_default]
 
-if not skip_model2:
-    skip_model2 = skip_model2_default
+# if coding_values == [""]:
+#     coding_values = [coding_default]
 
-if not skip_model3:
-    skip_model3 = skip_model3_default
+# if stopwords_values == [""]:
+#     stopwords_values = [stopwords_default]
 
-if not skip_model4:
-    skip_model4 = skip_model4_default
+# if stemming_values == [""]:
+#     stemming_values = [stemming_default]
 
-if not skip_model5:
-    skip_model5 = skip_model5_default
+# if uniform_prior_values == [""]:
+#     uniform_prior_values = [uniform_prior_default]
+
+# if not skip_model1:
+#     skip_model1 = skip_model1_default
+
+# if not skip_model2:
+#     skip_model2 = skip_model2_default
+
+# if not skip_model3:
+#     skip_model3 = skip_model3_default
+
+# if not skip_model4:
+#     skip_model4 = skip_model4_default
+
+# if not skip_model5:
+#     skip_model5 = skip_model5_default
 
 # Directory and file names:
-dir_out = "output1_175annotations"
-dir_in = "example_files/input"
+dir_out = "example_files/ML_output_test"
+dir_in = "example_files/ML_input"
 annotated_file_name = "ML_input_test_annotations.csv"  # Annotated data
-input_file_name = "ML_input_das_statements.csv"
+input_file_name = "ML_input_das_statements_test.csv"
 output_summary_file_all = "overview_models_parameters.csv"
 
 annotated_number = 175# Number of annotated statements

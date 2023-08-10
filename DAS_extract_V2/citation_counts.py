@@ -49,22 +49,24 @@ def merge_og_classify_dfs(file1, file2):
 
     return merged_df
 
+#merge DFs code 
+
+# file1 = '/Users/muthuku/Desktop/all_statements1.csv'
+# file2 = '/Users/muthuku/Downloads/alan-turing-institute-das-public-5581446_modify/output_LARGE_DB/Classified_SVM_combined_labels_no-coding-approach1-stopwords-no-uniformprior_yes-stemming_yes-test_no.csv'
+# df3 = merge_og_classify_dfs(file1, file2)
+# df3.to_csv("final_output_LARGE_DB.csv", encoding = "utf-8")
+
 # CITATION COUNT code 
 
-# df1 = pd.read_csv('/Users/muthuku/Desktop/all_statements.csv')
-# df1['combined_string_DAS'] = df1['combined_string_DAS'].str.replace(',', '')
-# df1['combined_string_DAS'] = df1['combined_string_DAS'].str.strip()
+# df1 = pd.read_csv('/Users/muthuku/Desktop/final_output_LARGE_DB.csv')
 # df2 = df1['DOI']
 # df1['citation_count'] = citation_count(df2)
 # # citations = citation_count(df1['citation_count'])
 
+#code to get average citation counts and class count number by year 
+
+# result = df1.groupby(['Year', 'classifying_number']).size().reset_index(name='counts')
+# average_citation_by_class_year = df1.groupby(['Year', 'classifying_number'])['citation_count'].mean().reset_index()
+
 # df1.to_csv('og_df_with_citations1.csv', encoding = "utf-8", index = False)
-
-#merge DFs code 
-
-file1 = '/Users/muthuku/Desktop/og_df_with_citations1.csv'
-file2 = '/Users/muthuku/Downloads/alan-turing-institute-das-public-5581446/output_full1722/Classified_SVM_combined_labels_yes-coding-approach1-stopwords-no-uniformprior_yes-stemming_yes-test_no.csv'
-
-df3 = merge_og_classify_dfs(file1, file2)
-df3.to_csv("final_output.csv", encoding = "utf-8")
           
