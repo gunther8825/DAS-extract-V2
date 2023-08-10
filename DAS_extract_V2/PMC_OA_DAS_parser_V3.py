@@ -23,7 +23,11 @@ def parse_xml_directory(directory):
 		print(xml_file)
 		#eTree parser to parse XML file into xml elements 
 		parser = etree.XMLParser(remove_comments=True)
-		tree = etree.parse(xml_file)
+		try:
+			tree = etree.parse(xml_file)
+		except etree.XMLSyntaxError as e:
+			print(f"XMLSyntaxError: {e}")
+
 		#get root of article- this root node differs for each XML
 		root = tree.getroot()
 
@@ -50,7 +54,10 @@ def parse_xml_directory(directory):
 
 					'''for the links , convert the XML DAS string back into an XML element and 
 					then use xpath to grab all the links that have the ".//ext-link, and append to list of urls''' 
-					root1 = etree.fromstring(element_string_note)
+					try:
+						root1 = etree.fromstring(element_string_note)
+					except etree.XMLSyntaxError as e:
+						print(f"XMLSyntaxError: {e}")
 					ext_link_elements = root1.xpath('.//ext-link')
 					for element in ext_link_elements:
 						url1 = element.get('{http://www.w3.org/1999/xlink}href')
