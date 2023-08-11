@@ -25,9 +25,9 @@ def grab_PMIDs_from_csv(source_file, target_file):
 	extracted_PMID.replace('', np.nan, inplace=True)
 	extracted_PMID.dropna(inplace=True)
 	filtered_PMIDs = [pmid for pmid in extracted_PMID if pmid.isdigit()]
-	filtered_df = pd.DataFrame(filtered_PMIDs)
+	filtered_df = pd.DataFrame(filtered_PMIDs, columns=["PMIDs"])
 	# Save the extracted URLs to the target file
-	filtered_df.to_csv(target_file, header=None, index=None)
+	filtered_df.to_csv(target_file, header=True, index=None)
 
 def isolate_rows_by_PMID(source_file, database, output_file):
 	'''
@@ -88,7 +88,7 @@ def extract_files(folder_path):
 		if file_name.endswith('.tar.gz'):
 			with tarfile.open(file_path, 'r') as tar_ref:
 				tar_ref.extractall(folder_path)
-		os.remove(file_path)
+			os.remove(file_path)
 
 
 def get_nxml(source_folder, target_folder, file_extension):
@@ -102,8 +102,17 @@ def get_nxml(source_folder, target_folder, file_extension):
 			#loop through each file and if file ends with .nxml, move to output folder
 			for file_name in os.listdir(folder_path):
 				file_path = os.path.join(folder_path, file_name)
+				# Check if the file already exists in the target folder
 				if file_name.endswith(file_extension):
-					shutil.move(file_path, target_folder)
+					target_file_path = os.path.join(target_folder, file_name)
+					counter = 1
+					while os.path.exists(target_file_path):
+						# If the file already exists, modify the filename with a suffix
+						base_name, extension = os.path.splitext(file_name)
+						new_file_name = f"{base_name}_{counter}{extension}"
+						target_file_path = os.path.join(target_folder, new_file_name)
+						counter += 1
+					shutil.move(file_path, target_file_path)
 
 
 
@@ -118,20 +127,20 @@ def get_nxml(source_folder, target_folder, file_extension):
 '''STEP 1 - search the full Pubmed OA database for the articles, use oa_file_list.csv, 
 outputs a filtered csv of database containing only our articles of interest'''
 
-#isolate_rows_by_PMID('/Users/muthuku/Desktop/pmids_07_22.txt', '/Users/muthuku/Desktop/Pragati2023/oa_file_list.csv', 'output1_07_22_PMC.csv')
+#isolate_rows_by_PMID('/Users/muthuku/Desktop/Pragati2023/first10000_results_canceronly.txt', '/Users/muthuku/Desktop/Pragati2023/oa_file_list.csv', 'output1_largerPMC.csv')
 
 #STEP 2 - using the links in the output file and download zipped PMC folders containing .nxml, .pdf, figures and data into a directory (download_PMC fxn)
 #STEP 2A- Each downladed file will look like PMC{ID Number}.tar.gz, using extract_files function to unzip them 
 
-#download_PMC('/Users/muthuku/Desktop/output1_07_22_PMC.csv', "PMC_folder_07_22")
+#download_PMC('/Users/muthuku/Desktop/output1_largerPMC.csv', "PMC_folder_LARGEDB1")
 
-# folder = '/Users/muthuku/Desktop/PMC_folder_07_22'
-# extract_files(folder)
+#folder = '/Users/muthuku/Desktop/PMC_folder_LARGE_DB2'
+#extract_files(folder)
 
 #STEP 3 - grab the full text XML from each PMC folder and create a folder with all articles
 
-#source_folder = '/Users/muthuku/Desktop/PMC_folder_07_22'
-#target_folder = '/Users/muthuku/Desktop/final_xml_07_22'
-#file_extension = '.nxml'
+# source_folder = '/Users/muthuku/Desktop/PMC_folder_LARGE_DB2'
+# target_folder = '/Users/muthuku/Desktop/final'
+# file_extension = '.nxml'
 
-#get_nxml(source_folder,target_folder,file_extension)
+# get_nxml(source_folder,target_folder,file_extension)

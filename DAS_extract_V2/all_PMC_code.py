@@ -87,7 +87,7 @@ def extract_files(folder_path):
 		#check if file ends with tar.gz and extract file contents 
 		if file_name.endswith('.tar.gz'):
 			with tarfile.open(file_path, 'r') as tar_ref:
-				tar_ref.extractall(file_path)
+				tar_ref.extractall(folder_path)
 			os.remove(file_path)
 
 
